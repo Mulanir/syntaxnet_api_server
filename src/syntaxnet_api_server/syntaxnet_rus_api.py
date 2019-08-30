@@ -280,8 +280,8 @@ class ProcessorSyntaxNet(object):
 
 class SyncHandler(SocketServer.BaseRequestHandler):
     def handle(self):
-        logger.debug('Incoming request.')
         print('HELLO MY DEAR FRIEND!')
+        logger.debug('Incoming request.')
         data = self._read_incoming_request()
 
         logger.debug('Morphological analysis...')
