@@ -7,4 +7,4 @@ if __name__ == "__main__":
     while True:
         message = input()
 
-        socket.send(bytearray(message))
+        socket.send(bytearray(message, 'utf-8'))
