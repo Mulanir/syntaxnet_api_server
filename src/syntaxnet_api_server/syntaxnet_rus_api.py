@@ -333,6 +333,7 @@ class EchoServer(asyncore.dispatcher):
         self.set_reuse_addr()
         self.bind((host, port))
         self.listen(5)
+        print('hello')
 
     def handle_accepted(self, sock, addr):
         print('Incoming connection from %s' % repr(addr))
