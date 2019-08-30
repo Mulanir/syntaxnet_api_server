@@ -335,10 +335,8 @@ class EchoServer(asyncore.dispatcher):
         self.listen(5)
         print('hello')
 
-    def handle_accepted(self, sock, addr):
-        print('Incoming connection from %s' % repr(addr))
-
     def handle_read(self):
+        print(123)
         data = self.recv(8192)
         if data:
             print('data')
@@ -361,16 +359,16 @@ def main():
 
     args = parser.parse_args()
 
-    # server = EchoServer(args.host, int(args.port))
-    # asyncore.loop()
+    server = EchoServer(args.host, int(args.port))
+    asyncore.loop()
 
-    sync_server = SocketServer.TCPServer(
-        (args.host, int(args.port)), SyncHandler)
-    stdout_strm = configure_stdout()
-    sync_server.morpher_ = ProcessorSyntaxNet(CFG_MORPH_PARSER)
-    sync_server.tagger_ = ProcessorSyntaxNet(CFG_MORPH_TAGGER)
-    sync_server.parser_ = ProcessorSyntaxNet(CFG_SYNTAX_PARSER)
-    sync_server.serve_forever()
+    # sync_server = SocketServer.TCPServer(
+    #     (args.host, int(args.port)), SyncHandler)
+    # stdout_strm = configure_stdout()
+    # sync_server.morpher_ = ProcessorSyntaxNet(CFG_MORPH_PARSER)
+    # sync_server.tagger_ = ProcessorSyntaxNet(CFG_MORPH_TAGGER)
+    # sync_server.parser_ = ProcessorSyntaxNet(CFG_SYNTAX_PARSER)
+    # sync_server.serve_forever()
 
 
 if __name__ == '__main__':
