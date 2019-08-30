@@ -3,9 +3,7 @@
 import SocketServer
 
 from google.protobuf import text_format
-from tensorflow.python.platform import tf_logging as logging
-from tensorflow.python.platform import gfile
-import tensorflow as tf
+
 import tempfile
 import shutil
 import logging
@@ -63,6 +61,9 @@ from syntaxnet.ops import gen_parser_ops
 from syntaxnet import structured_graph_builder
 from syntaxnet import graph_builder
 from syntaxnet import sentence_pb2
+import tensorflow as tf
+from tensorflow.python.platform import tf_logging as logging
+from tensorflow.python.platform import gfile
 
 class ProcessorSyntaxNetConfig(object):
     def __init__(self,
