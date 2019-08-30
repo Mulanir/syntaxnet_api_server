@@ -323,6 +323,25 @@ def configure_stdout():
 
     return strm
 
+import asyncore
+
+class EchoServer(asyncore.dispatcher):
+    def __init__(self, host, port):
+        asyncore.dispatcher.__init__(self)
+        self.create_socket()
+        self.set_reuse_addr()
+        self.bind((host, port))
+        self.listen(5)
+
+    def handle_accepted(self, sock, addr):
+        print('Incoming connection from %s' % repr(addr))
+
+    def handle_read(self):
+        data = self.recv(8192)
+        if data:
+            print('data')
+
+
 
 def main():
     import argparse
@@ -340,13 +359,16 @@ def main():
 
     args = parser.parse_args()
 
-    sync_server = SocketServer.TCPServer(
-        (args.host, int(args.port)), SyncHandler)
-    stdout_strm = configure_stdout()
-    sync_server.morpher_ = ProcessorSyntaxNet(CFG_MORPH_PARSER)
-    sync_server.tagger_ = ProcessorSyntaxNet(CFG_MORPH_TAGGER)
-    sync_server.parser_ = ProcessorSyntaxNet(CFG_SYNTAX_PARSER)
-    sync_server.serve_forever()
+    server = EchoServer(args.host, int(args.port))
+    asyncore.loop()
+
+    # sync_server = SocketServer.TCPServer(
+    #     (args.host, int(args.port)), SyncHandler)
+    # stdout_strm = configure_stdout()
+    # sync_server.morpher_ = ProcessorSyntaxNet(CFG_MORPH_PARSER)
+    # sync_server.tagger_ = ProcessorSyntaxNet(CFG_MORPH_TAGGER)
+    # sync_server.parser_ = ProcessorSyntaxNet(CFG_SYNTAX_PARSER)
+    # sync_server.serve_forever()
 
 
 if __name__ == '__main__':
