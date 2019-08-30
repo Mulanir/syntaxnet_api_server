@@ -1,11 +1,7 @@
 # -*- coding: utf8 -*-
 
 import SocketServer
-from syntaxnet import task_spec_pb2
-from syntaxnet.ops import gen_parser_ops
-from syntaxnet import structured_graph_builder
-from syntaxnet import graph_builder
-from syntaxnet import sentence_pb2
+
 from google.protobuf import text_format
 from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python.platform import gfile
@@ -62,6 +58,11 @@ shutil.copyfile(custom_file_path, orig_file_path)
 
 ################################################################################
 
+from syntaxnet import task_spec_pb2
+from syntaxnet.ops import gen_parser_ops
+from syntaxnet import structured_graph_builder
+from syntaxnet import graph_builder
+from syntaxnet import sentence_pb2
 
 class ProcessorSyntaxNetConfig(object):
     def __init__(self,
