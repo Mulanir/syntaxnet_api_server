@@ -280,7 +280,7 @@ class ProcessorSyntaxNet(object):
 
 class SyncHandler(SocketServer.BaseRequestHandler):
     def handle(self):
-        print('HELLO MY DEAR FRIEND!')
+        logger.debug('Incoming request hello.')
         logger.debug('Incoming request.')
         data = self._read_incoming_request()
 
